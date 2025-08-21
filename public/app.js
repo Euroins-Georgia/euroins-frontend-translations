@@ -48,8 +48,9 @@ function renderTable() {
   tbody.innerHTML = '';
   let filteredData = translationData;
   if (showUntranslatedOnly) {
+    const langHeaders = headers.filter(h => ['en', 'ka'].includes(h.toLowerCase()));
     filteredData = translationData.filter(row => {
-      return (!row['en'] || row['en'].trim() === '') || (!row['ka'] || row['ka'].trim() === '');
+      return langHeaders.some(lang => !row[lang] || row[lang].trim() === '');
     });
   }
   filteredData.forEach((row) => {
