@@ -180,7 +180,7 @@ export class ExtractService {
   }
 
   private extractNewCountryKeys(content: string, translationKeys: Map<string, string>): number {
-    const countryCodeRegex = /['"]([A-Z]{2})['"]:\s*\{/g;
+    const countryCodeRegex = /\b([A-Z]{2}):\s*\{/g;
     let addedCount = 0;
     let match: RegExpExecArray | null;
 
