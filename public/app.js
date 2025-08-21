@@ -52,8 +52,9 @@ function renderTable() {
       return (!row['en'] || row['en'].trim() === '') || (!row['ka'] || row['ka'].trim() === '');
     });
   }
-  filteredData.forEach((row, index) => {
+  filteredData.forEach((row) => {
     const tr = document.createElement('tr');
+    const realIndex = translationData.indexOf(row);
     headers.forEach(header => {
       const td = document.createElement('td');
       if (header === 'Key' || header === 'Context') {
@@ -62,8 +63,6 @@ function renderTable() {
       } else {
         const textarea = document.createElement('textarea');
         textarea.value = row[header] || '';
-        // Find the real index in translationData for updateCell
-        const realIndex = translationData.indexOf(row);
         textarea.addEventListener('input', (e) => updateCell(realIndex, header, e.target.value));
         td.appendChild(textarea);
       }
@@ -77,7 +76,7 @@ function renderTable() {
 function toggleFilterUntranslated() {
   showUntranslatedOnly = !showUntranslatedOnly;
   const btn = document.getElementById('filterBtn');
-  btn.textContent = showUntranslatedOnly ? 'Show All' : 'Show Untranslated Only';
+  btn.textContent = showUntranslatedOnly ? 'All' : 'Untranslated';
   renderTable();
 }
 
