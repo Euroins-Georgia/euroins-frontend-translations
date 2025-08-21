@@ -176,7 +176,7 @@ class ExtractService {
         }
     }
     extractNewCountryKeys(content, translationKeys) {
-        const countryCodeRegex = /['"]([A-Z]{2})['"]:\s*\{/g;
+        const countryCodeRegex = /\b([A-Z]{2}):\s*\{/g;
         let addedCount = 0;
         let match;
         while ((match = countryCodeRegex.exec(content)) !== null) {
