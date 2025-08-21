@@ -1,6 +1,8 @@
+
 let translationData = [];
 let headers = [];
 let hasUnsavedChanges = false;
+let showUntranslatedOnly = false;
 
 document.addEventListener('DOMContentLoaded', loadTranslations);
 
@@ -44,29 +46,39 @@ function renderTable() {
   });
 
   tbody.innerHTML = '';
-  translationData.forEach((row, index) => {
+  let filteredData = translationData;
+  if (showUntranslatedOnly) {
+    filteredData = translationData.filter(row => {
+      return (!row['en'] || row['en'].trim() === '') || (!row['ka'] || row['ka'].trim() === '');
+    });
+  }
+  filteredData.forEach((row, index) => {
     const tr = document.createElement('tr');
-    
     headers.forEach(header => {
       const td = document.createElement('td');
-      
       if (header === 'Key' || header === 'Context') {
         td.className = header.toLowerCase() + '-cell';
         td.textContent = row[header] || '';
       } else {
         const textarea = document.createElement('textarea');
         textarea.value = row[header] || '';
-        textarea.addEventListener('input', (e) => updateCell(index, header, e.target.value));
+        // Find the real index in translationData for updateCell
+        const realIndex = translationData.indexOf(row);
+        textarea.addEventListener('input', (e) => updateCell(realIndex, header, e.target.value));
         td.appendChild(textarea);
       }
-      
       tr.appendChild(td);
     });
-
     tbody.appendChild(tr);
   });
-
   table.style.display = 'table';
+}
+
+function toggleFilterUntranslated() {
+  showUntranslatedOnly = !showUntranslatedOnly;
+  const btn = document.getElementById('filterBtn');
+  btn.textContent = showUntranslatedOnly ? 'Show All' : 'Show Untranslated Only';
+  renderTable();
 }
 
 function updateCell(rowIndex, header, value) {
