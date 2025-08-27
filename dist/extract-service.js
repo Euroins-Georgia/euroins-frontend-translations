@@ -39,7 +39,7 @@ const path = __importStar(require("path"));
 class ExtractService {
     constructor(projectRoot) {
         this.config = {
-            sourcePattern: '{app,components}/**/*.{ts,tsx}',
+            sourcePattern: '{lib,app,components}/**/*.{ts,tsx}',
             outputDir: 'i18n/translations',
             csvFile: 'i18n/translations/messages.csv',
             supportedLocales: ['en', 'ka'],
