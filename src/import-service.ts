@@ -19,7 +19,7 @@ export class ImportService {
     this.config = {
       csvFile: 'i18n/translations/messages.csv',
       messagesDir: 'i18n/messages',
-      supportedLocales: ['en', 'ka'],
+      supportedLocales: ['en', 'ka', 'ru', 'tr'],
       projectRoot
     };
   }

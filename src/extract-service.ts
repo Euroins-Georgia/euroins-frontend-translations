@@ -10,7 +10,7 @@ export class ExtractService {
       sourcePattern: '{lib,app,components}/**/*.{ts,tsx}',
       outputDir: 'i18n/translations',
       csvFile: 'i18n/translations/messages.csv',
-      supportedLocales: ['en', 'ka'],
+      supportedLocales: ['en', 'ka', 'ru', 'tr'],
       messagesDir: 'i18n/messages',
       projectRoot
     };
